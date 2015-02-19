@@ -89,8 +89,20 @@ section {
 aside {
   display: none;
 }
+.button-container {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
 .new-tweets {
+  background: #36647F;
+  border: 2px solid white;
+  border-radius: 12px;
+  color: white;
   display: none;
+  font-size: 12px;
+  padding: 12px;
+  margin: 0 auto;
 }
 .tweet {
   margin: 10px 0;
