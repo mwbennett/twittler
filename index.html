@@ -11,32 +11,61 @@
     <header>
       <h1 class="logo">twittler</h1>
     </header>
+    
     <section class="tweets-display">
-      
+      <button class="new-tweets">
+      </button>
     </section>
+    
+    <aside class="user-display">
+    </aside>
+    
     <script>
 
       $(document).ready(function(){
         var $display = $('section');
 
-        var index = streams.home.length - 1;
+        var tweets = streams.home,
+            tweetsLoaded = 0,
+            index = streams.home.length - 1,
+            newTweets = 0;
         
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div class="tweet"></div>');
-          var $user = $('<div class="username"></div>');
-          var $message = $('<p class="message"></p>');
-          var $timestamp = $('<p class="timestamp"></p>');
-          $user.text('@' + tweet.user);
-          $message.text(tweet.message);
-          $timestamp.text(moment(tweet.created_at).fromNow());
-          $user.appendTo($tweet);
-          $message.appendTo($tweet);
-          $timestamp.appendTo($tweet);
-          $('<hr>').appendTo($tweet);
-          $tweet.appendTo($display);
-          index -= 1;
-        }
+        function loadAllTweets(){
+          while(index >= 0){
+            var tweet = tweets[index];
+            var $tweet = $('<div class="tweet"></div>');
+            var $userArea = $('<div class="user-area"></div>');
+            var $user = $('<span class="username"></span>');
+            var $message = $('<p class="message"></p>');
+            var $timestamp = $('<p class="timestamp"></p>');
+            $user.text('@' + tweet.user);
+            $user.appendTo($userArea);
+            $message.text(tweet.message);
+            $timestamp.text(moment(tweet.created_at).fromNow());
+            $userArea.appendTo($tweet);
+            $message.appendTo($tweet);
+            $timestamp.appendTo($tweet);
+            $('<hr>').appendTo($tweet);
+            $tweet.appendTo($display);
+            index -= 1;
+            tweetsLoaded += 1;
+          }
+        };
+
+        loadAllTweets();
+
+        function checkTweets() {
+          newTweets = tweets.length - tweetsLoaded;
+          if (newTweets > 0) {
+            $(".new-tweets").show();
+            $(".new-tweets").text("Load " + newTweets + " new tweets");
+          }
+        };
+        setInterval(checkTweets, 5000);
+
+        $(".username").on("click", function(){
+          
+        });
 
       });
 

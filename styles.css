@@ -63,6 +63,7 @@ header {
   text-align: center;
   padding: 10px 0;
   color: #6BD9FF;
+  border-bottom: 1px solid #8DB8D1;
 }
 h1 {
   font-size: 44px;
@@ -85,6 +86,12 @@ section {
   background: #F4FCFF;
   padding: 15px;
 }
+aside {
+  display: none;
+}
+.new-tweets {
+  display: none;
+}
 .tweet {
   margin: 10px 0;
 }
@@ -97,3 +104,7 @@ section {
   font-size: 14px;
   color: darkgrey;
 }
+
+
+
+
