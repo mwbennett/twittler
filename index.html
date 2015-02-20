@@ -20,6 +20,7 @@
     </section>
     
     <aside class="user-display">
+      <h1 class="selected-user"></h1>
     </aside>
     
     <script>
@@ -30,11 +31,11 @@
 
         var tweets = streams.home,
             tweetsLoaded = 0,
-            index = 0,
+            lastIndex = 0,
             newTweets = 0;
         
-        function buildTweets() {    
-          var tweet = tweets[index];
+        function showTweet(collection, position, placement) {    
+          var tweet = collection[position];
           var $tweet = $('<div class="tweet"></div>');
           var $userArea = $('<div class="user-area"></div>');
           var $user = $('<span class="username"></span>');
@@ -48,18 +49,18 @@
           $message.appendTo($tweet);
           $timestamp.appendTo($tweet);
           $('<hr>').appendTo($tweet);
-          $tweet.insertAfter($button);
-          index += 1;
+          $tweet.insertAfter(placement);
           tweetsLoaded += 1;
         };
 
-        function loadTweets(){
-          while(index <= tweets.length - 1){
-            buildTweets();
+        function loadAllTweets(){
+          while(lastIndex <= tweets.length - 1){
+            showTweet(tweets, lastIndex, $button);
+            lastIndex += 1;
           }
         };
 
-        loadTweets();
+        loadAllTweets();
 
         function checkTweets() {
           newTweets = tweets.length - tweetsLoaded;
@@ -70,10 +71,22 @@
         };
         setInterval(checkTweets, 5000);
 
+        function showUserTweets(user){
+          var userTweets = streams.users.user;
+          var index = 0;
+          while (index < userTweets.length) {
+            showTweet(userTweets, index, $(".selected-user"));
+            index += 1;
+          }
+        };
+
         $(".new-tweets").on("click", function() {
-          loadTweets();
+          loadAllTweets();
           $(this).hide();
         });
+        
+        // NEEDS TO BE FIXED - ISN'T ABLE TO FIND USERNAME 
+        // $(".username").on("click", showUserTweets($(this).text().slice(1)));
 
       });
 

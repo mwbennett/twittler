@@ -87,7 +87,7 @@ section {
   padding: 15px;
 }
 aside {
-  display: none;
+  /*display: none;*/
 }
 .button-container {
   width: 100%;
