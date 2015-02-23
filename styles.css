@@ -69,10 +69,6 @@ h1 {
   font-size: 44px;
   line-height: 52px;
 }
-h2 {
-  font-size: 24px;
-  line-height: 44px;
-}
 hr {
   border: 0;
   height: 0;
@@ -80,11 +76,13 @@ hr {
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 section {
-  width: 1000px;
-  max-width: 70%;
-  margin: 0 auto;
+  width: 500px;
+  max-width: 40%;
+  margin: 0 5%;
   background: #F4FCFF;
   padding: 15px;
+  border-left: 3px solid white;
+  border-right: 3px solid white;
 }
 aside {
   /*display: none;*/
@@ -104,6 +102,10 @@ aside {
   padding: 12px;
   margin: 0 auto;
 }
+.new-tweets:hover {
+  cursor: pointer;
+  background: #4682A6;
+}
 .tweet {
   margin: 10px 0;
 }
@@ -111,6 +113,10 @@ aside {
   font-size: 22px;
   font-weight: bold;
   padding: 5px 0;
+}
+.username:hover {
+  color: darkgrey;
+  cursor: pointer;
 }
 .timestamp {
   font-size: 14px;
