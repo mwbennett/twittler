@@ -11,22 +11,25 @@
     <header>
       <h1 class="logo">twittler</h1>
     </header>
+
+    <div class="button-container">
+      <button class="new-tweets">
+      </button>
+    </div>
     
-    <section class="tweets-display">
-      <div class="button-container">
-        <button class="new-tweets">
-        </button>
-      </div>
-    </section>
+    <div class="container"> 
+      <section class="tweets-display">
+      </section>
+      
+      <aside class="user-display">
+        <h2 class="selected-user"></h2>
+      </aside>
+    </div>
     
-    <aside class="user-display">
-      <h1 class="selected-user"></h1>
-    </aside>
-    
-    <script>
+    <script>  
 
       $(document).ready(function(){
-        var $display = $('section');
+        var $display = $('.tweets-display');
         var $button = $('.button-container');
 
         var tweets = streams.home,
@@ -49,13 +52,13 @@
           $message.appendTo($tweet);
           $timestamp.appendTo($tweet);
           $('<hr>').appendTo($tweet);
-          $tweet.insertAfter(placement);
+          $tweet.prependTo(placement);
           tweetsLoaded += 1;
         };
 
         function loadAllTweets(){
           while(lastIndex <= tweets.length - 1){
-            showTweet(tweets, lastIndex, $button);
+            showTweet(tweets, lastIndex, $display);
             lastIndex += 1;
           }
         };
@@ -71,8 +74,10 @@
         };
         setInterval(checkTweets, 5000);
 
-        function showUserTweets(user){
-          var userTweets = streams.users.user;
+        function showUserTweets(selectedUser){
+          $(".selected-user").text(selectedUser);
+          var username = selectedUser.slice(1);
+          var userTweets = streams.users[username];
           var index = 0;
           while (index < userTweets.length) {
             showTweet(userTweets, index, $(".selected-user"));
@@ -82,11 +87,15 @@
 
         $(".new-tweets").on("click", function() {
           loadAllTweets();
+          if ($(".user-display").)
           $(this).hide();
         });
-        
-        // NEEDS TO BE FIXED - ISN'T ABLE TO FIND USERNAME 
-        // $(".username").on("click", showUserTweets($(this).text().slice(1)));
+
+        $(".username").on("click", function(){
+          $(".user-display").hide();
+          $(".user-display").show();
+          showUserTweets($(this).text());
+        });
 
       });
 

@@ -75,17 +75,19 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
-section {
-  width: 500px;
+section, aside {
+  width: 600px;
   max-width: 40%;
-  margin: 0 5%;
+  margin: 0 10px;
   background: #F4FCFF;
   padding: 15px;
   border-left: 3px solid white;
   border-right: 3px solid white;
+  float: left;
 }
-aside {
-  /*display: none;*/
+.container{
+  width: 1000px;
+  height: 1000px;
 }
 .button-container {
   width: 100%;
@@ -94,13 +96,13 @@ aside {
 }
 .new-tweets {
   background: #36647F;
-  border: 2px solid white;
+  border: none;
   border-radius: 12px;
   color: white;
   display: none;
   font-size: 12px;
   padding: 12px;
-  margin: 0 auto;
+  margin: 3px auto;
 }
 .new-tweets:hover {
   cursor: pointer;
@@ -121,6 +123,9 @@ aside {
 .timestamp {
   font-size: 14px;
   color: darkgrey;
+}
+.user-display {
+  display: none;
 }
 
 
