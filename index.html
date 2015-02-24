@@ -22,7 +22,6 @@
       </section>
       
       <aside class="user-display">
-        <h2 class="selected-user"></h2>
       </aside>
     </div>
     
@@ -33,9 +32,10 @@
         var $button = $('.button-container');
 
         var tweets = streams.home,
-            tweetsLoaded = 0,
             lastIndex = 0,
-            newTweets = 0;
+            newTweets = 0,
+            loadedTweets = 0,
+            selectedUser = undefined;
         
         function showTweet(collection, position, placement) {    
           var tweet = collection[position];
@@ -53,48 +53,56 @@
           $timestamp.appendTo($tweet);
           $('<hr>').appendTo($tweet);
           $tweet.prependTo(placement);
-          tweetsLoaded += 1;
         };
 
         function loadAllTweets(){
+          $(".tweets-display").text('');
+          lastIndex = 0;
+          loadedTweets = 0;
           while(lastIndex <= tweets.length - 1){
             showTweet(tweets, lastIndex, $display);
             lastIndex += 1;
+            loadedTweets += 1;
           }
         };
 
         loadAllTweets();
 
-        function checkTweets() {
-          newTweets = tweets.length - tweetsLoaded;
-          if (newTweets > 0) {
-            $(".new-tweets").show();
-            $(".new-tweets").text("Load " + newTweets + " new tweets");
-          }
+        function refresh() {
+          $(".new-tweets").show();
+          $(".new-tweets").text("Refresh");
         };
-        setInterval(checkTweets, 5000);
+        setInterval(refresh, 5000);
 
-        function showUserTweets(selectedUser){
-          $(".selected-user").text(selectedUser);
-          var username = selectedUser.slice(1);
-          var userTweets = streams.users[username];
+        function loadUserTweets(clickedUser){
+          $(".user-display").text('');
+          var loadedTweetsArray = streams.home.slice(0, loadedTweets);
+          var userTweets = loadedTweetsArray.filter(function(element, index){
+            return element.user === clickedUser.slice(1);
+          });
           var index = 0;
           while (index < userTweets.length) {
-            showTweet(userTweets, index, $(".selected-user"));
-            index += 1;
+            showTweet(userTweets, index, ".user-display");
+            index++;
           }
+          var $userHeading = $('<h2 class="selected-user"></h2>');
+          $userHeading.prependTo(".user-display");
+          $(".selected-user").text(clickedUser);
         };
 
         $(".new-tweets").on("click", function() {
           loadAllTweets();
-          if ($(".user-display").)
+          if (selectedUser){
+            loadUserTweets(selectedUser);
+          }
           $(this).hide();
         });
 
-        $(".username").on("click", function(){
-          $(".user-display").hide();
+        $(".username").on("click", function(event){
+          event.preventDefault();
           $(".user-display").show();
-          showUserTweets($(this).text());
+          selectedUser = $(this).text();
+          loadUserTweets(selectedUser);
         });
 
       });
