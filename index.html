@@ -88,6 +88,9 @@
           var $userHeading = $('<h2 class="selected-user"></h2>');
           $userHeading.prependTo(".user-display");
           $(".selected-user").text(clickedUser);
+          var $close = $('<button class="close"></button>');
+          $close.prependTo(".user-display");
+          $close.text("X");
         };
 
         $("div").on("click", ".new-tweets", function() {
@@ -103,6 +106,11 @@
           $(".user-display").show();
           selectedUser = $(this).text();
           loadUserTweets(selectedUser);
+        });
+
+        $(".user-display").on("click", ".close", function(){
+          $(".user-display").hide();
+          selectedUser = undefined;
         });
 
       });
