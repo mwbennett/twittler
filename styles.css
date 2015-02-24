@@ -111,6 +111,9 @@ section, aside {
 .tweet {
   margin: 10px 0;
 }
+.user-area {
+  padding: 0 0 4px 0;
+}
 .username {
   font-size: 22px;
   font-weight: bold;
