@@ -64,6 +64,9 @@
             lastIndex += 1;
             loadedTweets += 1;
           }
+          var $tweetsHeading = $('<div class="column-heading"></div>');
+          $tweetsHeading.text("All Users");
+          $tweetsHeading.prependTo('.tweets-display');
         };
 
         loadAllTweets();
@@ -85,7 +88,7 @@
             showTweet(userTweets, index, ".user-display");
             index++;
           }
-          var $userHeading = $('<h2 class="selected-user"></h2>');
+          var $userHeading = $('<div class="selected-user column-heading"></div>');
           $userHeading.prependTo(".user-display");
           $(".selected-user").text(clickedUser);
           var $close = $('<button class="close"></button>');
