@@ -83,6 +83,7 @@ section, aside {
   padding: 15px;
   border-left: 3px solid white;
   border-right: 3px solid white;
+  border-radius: 12px;
   float: left;
 }
 button {
@@ -103,6 +104,14 @@ button:hover {
   position: relative;
   top: -5px;
   right: -5px;
+}
+.column-heading {
+  width: 100%;
+  padding: 6px;
+  color: #36647F;
+  font-size: 28px;
+  text-align: center;
+  font-weight: bold;
 }
 .container{
   width: 1000px;
